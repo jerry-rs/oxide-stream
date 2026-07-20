@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'sonner'
 import { fetchVideoList, deleteVideo, fetchVideoInfo } from '@/api/videos'
 import type { VideoListResponse } from '@/types'
 
@@ -29,10 +30,14 @@ export function useDeleteVideo(currentPath: string) {
 
       return { previousData }
     },
+    onSuccess: (_data, filename) => {
+      toast.success(`Deleted "${filename}" successfully`,{ position: "top-right" })
+    },
     onError: (_err, _filename, context) => {
       if (context?.previousData) {
         queryClient.setQueryData(['videos', currentPath], context.previousData)
       }
+      toast.error('Failed to delete video',{ position: "top-right" })
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['videos', currentPath] })

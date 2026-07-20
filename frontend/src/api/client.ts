@@ -34,7 +34,12 @@ export async function apiFetch<T>(url: string, options?: RequestInit): Promise<T
   if (response.status === 204) {
     return undefined as T
   }
-  return response.json() as Promise<T>
+  // Handle empty body (e.g. DELETE returning 200 with no content)
+  const text = await response.text()
+  if (!text) {
+    return undefined as T
+  }
+  return JSON.parse(text) as T
 }
 
 export async function apiFetchText(url: string): Promise<string> {
