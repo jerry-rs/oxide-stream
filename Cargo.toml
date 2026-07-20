@@ -7,19 +7,18 @@ edition = "2024"
 axum = { version = "0.8.9", features = ["macros"] }
 blake3 = { version = "1.8.5" }
 clap = { version = "4.6.2", features = ["derive", "env"] }
+hex = { version = "0.4.3", features = ["serde"] }
 local-ip-address = { version = "0.6.13" }
 mimalloc = { version = "0.1.52" }
 mime_guess = { version = "2.0.5" }
+ring = { version = "0.17.14" }
 rust-embed = { version = "8.12.0", features = ["axum-ex", "mime-guess"] }
 serde = { version = "1.0.228", features = ["derive"] }
 tokio = { version = "1.52.3", features = ["full"] }
 tower = { version = "0.5.3" }
-tower-http = { version = "0.7.0", features = ["fs","validate-request"] }
+tower-http = { version = "0.7.0", features = ["fs", "validate-request"] }
 tracing = { version = "0.1.44" }
 tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
-ring = {version = "0.17.14"}
-hex = {version = "0.4.3",features = ["serde"]}
-
 
 [build-dependencies]
 walkdir = { version = "2.5.0" }
