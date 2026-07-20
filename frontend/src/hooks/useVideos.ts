@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'sonner'
-import { fetchVideoList, deleteVideo, fetchVideoInfo } from '@/api/videos'
+import { fetchVideoList, deleteVideo, fetchVideoInfo ,fetchVideoDetailInfo} from '@/api/videos'
 import type { VideoListResponse } from '@/types'
 
 export function useVideoList(currentPath: string) {
@@ -49,6 +49,15 @@ export function useVideoInfo(path: string) {
   return useQuery({
     queryKey: ['video-info', path],
     queryFn: () => fetchVideoInfo(path),
+    enabled: !!path,
+  })
+}
+
+
+export function useVideoDetailInfo(path: string) {
+  return useQuery({
+    queryKey: ['video-info', path],
+    queryFn: () => fetchVideoDetailInfo(path),
     enabled: !!path,
   })
 }

@@ -1,3 +1,11 @@
+export type VideoDetailInfo = {
+  filename: string
+  size: number | null
+  mime_type: string
+  blake3: string
+  sha256: string
+}
+
 export type VideoInfo = {
   filename: string
   size: number | null

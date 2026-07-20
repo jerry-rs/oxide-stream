@@ -5,4 +5,5 @@ export const ENDPOINTS = {
   videoDelete: (path: string) => `${API_BASE}/videos/delete/${path}`,
   videoStream: (path: string) => `${API_BASE}/videos/stream/${path}`,
   videoInfo: (path: string) => `${API_BASE}/videos/info/${path}`,
+  videoDetailInfo: (path: string) => `${API_BASE}/videos/detail/info/${path}`,
 } as const

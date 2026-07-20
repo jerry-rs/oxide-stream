@@ -1,4 +1,4 @@
-import type { VideoListResponse, VideoInfo } from '@/types'
+import type { VideoListResponse, VideoInfo,VideoDetailInfo } from '@/types'
 import { encodePath, apiFetch, apiFetchText } from './client'
 import { ENDPOINTS } from './endpoints'
 
@@ -31,4 +31,9 @@ export function getVideoStreamUrl(path: string): string {
 
 export async function fetchVideoInfo(path: string): Promise<VideoInfo> {
   return apiFetch<VideoInfo>(ENDPOINTS.videoInfo(encodePath(path)))
+}
+
+
+export async function fetchVideoDetailInfo(path: string): Promise<VideoDetailInfo> {
+  return apiFetch<VideoDetailInfo>(ENDPOINTS.videoDetailInfo(encodePath(path)))
 }

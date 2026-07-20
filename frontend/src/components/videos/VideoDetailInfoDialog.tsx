@@ -7,7 +7,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
-import { useVideoInfo } from '@/hooks/useVideos'
+import { useVideoDetailInfo } from '@/hooks/useVideos'
 import { formatSize } from '@/lib/utils'
 
 type VideoInfoDialogProps = {
@@ -16,9 +16,9 @@ type VideoInfoDialogProps = {
   onClose: () => void
 }
 
-export function VideoInfoDialog({ currentPath, filename, onClose }: VideoInfoDialogProps) {
+export function VideoDetailInfoDialog({ currentPath, filename, onClose }: VideoInfoDialogProps) {
   const path = filename ? (currentPath ? `${currentPath}/${filename}` : filename) : ''
-  const { data: info, isLoading } = useVideoInfo(path)
+  const { data: info, isLoading } = useVideoDetailInfo(path)
 
   return (
     <AlertDialog open={filename !== null} onOpenChange={(open) => { if (!open) onClose() }}>
@@ -51,6 +51,10 @@ export function VideoInfoDialog({ currentPath, filename, onClose }: VideoInfoDia
               <div className="flex items-start gap-4 text-sm">
                 <span className="min-w-[60px] text-muted-foreground">BLAKE3:</span>
                 <span className="break-all font-mono text-[10px]">{info.blake3}</span>
+              </div>
+                <div className="flex items-start gap-4 text-sm">
+                <span className="min-w-[60px] text-muted-foreground">SHA256:</span>
+                <span className="break-all font-mono text-[10px]">{info.sha256}</span>
               </div>
             </>
           ) : (

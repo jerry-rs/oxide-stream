@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { useVideoList, useDeleteVideo } from '@/hooks/useVideos'
-import { VideoInfoDialog } from '@/components/videos/VideoInfoDialog'
+import { VideoDetailInfoDialog } from '@/components/videos/VideoDetailInfoDialog'
 import { DataTable } from '@/components/ui/data-table'
 import type { VideoItem } from '@/types'
 import VideoPlayer from '@/components/videos/VideoPlayer'
@@ -49,7 +49,7 @@ export default function VideoTable({ currentPath, onPathChange }: VideoTableProp
         onCancel={() => setDeleteTarget(null)}
       />
 
-      <VideoInfoDialog
+      <VideoDetailInfoDialog
         currentPath={currentPath}
         filename={infoTarget}
         onClose={() => setInfoTarget(null)}
