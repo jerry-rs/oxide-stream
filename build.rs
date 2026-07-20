@@ -2,13 +2,18 @@ const FRONTEND_RELATIVE_DIR: &'static str = "frontend";
 
 fn main() {
     let current_dir = std::env::current_dir().unwrap();
+    let dist_dir = current_dir.join("dist");
+    if dist_dir.exists() {
+        std::fs::remove_dir_all(&dist_dir).unwrap();
+        println!("cargo::warning=🚀 success to remove {}",dist_dir.display());
+    }
     let frontend_dir = current_dir.join(FRONTEND_RELATIVE_DIR);
     if !frontend_dir.exists() {
         panic!("Frontend not found");
     }
 
     if !frontend_dir.join("node_modules").exists() {
-        println!("cargo::warning=📦 node_modules not found. Running 'npm install'...");
+        println!("cargo::warning=🚀  node_modules not found. Running 'npm install'...");
         let status = std::process::Command::new("pnpm")
             .args(["install"])
             .current_dir(&frontend_dir)
