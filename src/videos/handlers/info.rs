@@ -25,7 +25,10 @@ pub(crate) async fn video_info_handler(
             return StatusCode::NOT_FOUND.into_response();
         }
     };
-    info!("starting to get video info from {}", safe_video_path.display());
+    info!(
+        "starting to get video info from {}",
+        safe_video_path.display()
+    );
 
     let filename = safe_video_path
         .file_name()
@@ -48,7 +51,10 @@ pub(crate) async fn video_info_handler(
             hash.finalize().to_string()
         })
         .unwrap_or_default();
-
+    info!(
+        "success to get video info from {}",
+        safe_video_path.display()
+    );
     (
         StatusCode::OK,
         Json(VideoInfoResponse {

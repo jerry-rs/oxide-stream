@@ -1,11 +1,11 @@
-import './App.css'
+import { MainLayout } from './components/layout/MainLayout'
+import { VerificationGate } from './components/VerificationGate'
 
 function App() {
-
   return (
-    <>
-      asdsad
-    </>
+    <VerificationGate>
+      <MainLayout />
+    </VerificationGate>
   )
 }
 

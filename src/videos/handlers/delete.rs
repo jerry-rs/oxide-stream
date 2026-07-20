@@ -15,9 +15,7 @@ pub(crate) async fn video_delete_handler(
             return StatusCode::NOT_FOUND.into_response();
         }
     };
-
-    info!("starting to delete video from {}", safe_video_path.display());
-
+    info!("starting to delete {}", safe_video_path.display());
     if safe_video_path.is_dir() {
         if let Err(e) = tokio::fs::remove_dir_all(&safe_video_path).await {
             error!("{e}");
@@ -29,5 +27,6 @@ pub(crate) async fn video_delete_handler(
             return StatusCode::INTERNAL_SERVER_ERROR.into_response();
         }
     }
+    info!("success to delete {}", safe_video_path.display());
     StatusCode::OK.into_response()
 }

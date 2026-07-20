@@ -10,7 +10,7 @@ use tracing::{error, info, instrument};
 fn is_video_ext(ext: &str) -> bool {
     matches!(
         ext.to_lowercase().as_str(),
-        "mp4" | "mkv" | "webm" | "avi" | "mov" | "wmv" | "flv" | "m4v" | "ts" | "m3u8" | "srt"
+        "mp4" | "mkv" | "webm" | "avi" | "mov" | "wmv" | "flv" | "m4v" | "ts" | "m3u8"
     )
 }
 
@@ -116,6 +116,7 @@ pub(crate) async fn video_list_handler(
                 });
             }
             items.sort_by(|a, b| a.r#type.cmp(&b.r#type));
+            info!("success to list entry from {}", safe_video_dir.display());
             (StatusCode::OK, Json(VideoListResponse { items })).into_response()
         }
         Err(e) => {

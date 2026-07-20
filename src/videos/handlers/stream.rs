@@ -17,12 +17,15 @@ pub(crate) async fn video_stream_handler(
             return StatusCode::NOT_FOUND.into_response();
         }
     };
-    info!("playing video {} ", safe_video_path.display());
+    info!("starting to play video from {} ", safe_video_path.display());
     match tower_http::services::ServeFile::new(&safe_video_path)
         .oneshot(req)
         .await
     {
-        Ok(response) => response.into_response(),
+        Ok(response) => {
+            info!("success to play video from {} ", safe_video_path.display());
+            response.into_response()
+        },
         Err(e) => {
             error!("{e}");
             StatusCode::INTERNAL_SERVER_ERROR.into_response()
