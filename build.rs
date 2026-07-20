@@ -24,6 +24,7 @@ fn main() {
 
     // 1. 先监控 src 目录本身（用于感知：新增文件、删除文件、重命名）
     println!("cargo::rerun-if-changed={}", frontend_dir.join("src").display());
+    println!("cargo:rerun-if-changed={}", current_dir.join("build.rs").display());
 
     walkdir::WalkDir::new(frontend_dir.join("src"))
         .follow_root_links(true)
