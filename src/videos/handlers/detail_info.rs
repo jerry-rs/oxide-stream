@@ -53,17 +53,14 @@ pub(crate) async fn video_detail_info_handler(
             hash.finalize().to_string()
         })
         .unwrap_or_default();
-    let hasher = ring::digest::Context::new(&ring::digest::SHA256);
-
 
     let sha256 = std::fs::File::open(&safe_video_path)
         .ok()
         .map(
-            |mut file| {
+            |file| {
                 let mut buf_reader = std::io::BufReader::new(file);
                 let mut hasher = ring::digest::Context::new(&ring::digest::SHA256);
                 let mut buf = vec![0u8;1024];
-                let is_success = true;
                 loop {
                    match buf_reader.read(&mut buf){
                        Ok(0) => break,
